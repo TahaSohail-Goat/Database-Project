@@ -61,7 +61,7 @@ BEGIN TRY
     UPDATE TA
     SET    TA.status       = 'Completed',
            TA.completed_at = GETDATE(),
-           TA.notes        = ISNULL(TA.notes, '') + ' | Auto-completed on event closure.'
+           TA.notes        = ISNULL(CAST(TA.notes AS VARCHAR(MAX)), '') + ' | Auto-completed on event closure.'
     FROM   Team_Assignment TA
     INNER JOIN Emergency_Report ER ON ER.report_id = TA.report_id
     WHERE  ER.disaster_event_id = @event_id_to_close
@@ -109,7 +109,7 @@ BEGIN TRY
     UPDATE AR
     SET    AR.status        = 'Rejected',
            AR.resolved_date = GETDATE(),
-           AR.remarks       = ISNULL(AR.remarks, '') + ' | Lapsed — parent event closed.'
+           AR.remarks       = ISNULL(CAST(AR.remarks AS VARCHAR(MAX)), '') + ' | Lapsed — parent event closed.'
     FROM   Approval_Request AR
     INNER JOIN Resource_Allocation RA ON RA.allocation_id = AR.allocation_id
     INNER JOIN Emergency_Report ER    ON ER.report_id     = RA.report_id
