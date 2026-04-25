@@ -1,10 +1,10 @@
 const sql = require("mssql");
 
 const config = {
-    user: "TAHASOHAIL",
-    password: "1234",
+    user: "Artfever",
+    password: "1010",
     server: "localhost",
-    database: "CDIEM",
+    database: "DBPROJECT",
     options: {
         encrypt: false,
         trustServerCertificate: true
